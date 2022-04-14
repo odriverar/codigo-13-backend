@@ -1,0 +1,7 @@
+dias = ("Lunes", "Martes", "Miercoles", "Jueves", "Viernes")
+print(dias)
+dias = list(dias)
+dias.append("Sabado")
+print(dias)
+dias = tuple(dias)
+print(dias)

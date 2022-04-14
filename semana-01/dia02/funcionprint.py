@@ -1,0 +1,5 @@
+print("Hola", end=" ***** ")
+print("Mundo")
+print("*", end="_")
+print("_" * 5, end="")
+print("*")
