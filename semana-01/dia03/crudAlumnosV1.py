@@ -1,15 +1,19 @@
 import tabulate
-from libAlumnos import buscarAlumno, menu, insertarAlumno, actualizarAlumno, eliminarAlumno
+from libAlumnos import buscarAlumno, menu, insertarAlumno, actualizarAlumno, eliminarAlumno, cargarAlumnos, grabarAlumnos
 # PROGRAMA PARA
 # CREATE - C
 # READ - R
 # UPDATE - U
 # DELETE - D 
 
-menu()
 
+
+menu()
 opcion = 0
-alumnos = [{'nombre': 'David Rivera Robles', 'email': 'odriverar@gmail.com', 'celular': '987762000'}]
+# alumnos = [{'nombre': 'David Rivera Robles', 'email': 'odriverar@gmail.com', 'celular': '987762000'}]
+#Cargamos datos del archivo de texto
+alumnos = cargarAlumnos()
+
 while (opcion != 5):
     opcion = int(input("INGRESE OPCIÓN MENU: "))
     if opcion == 1:
@@ -54,6 +58,7 @@ while (opcion != 5):
                 eliminarAlumno(indexAlumno, alumnos)
     elif opcion == 5 or opcion == 0:
         print()
+        strAlumnos = grabarAlumnos(alumnos)
         print("FINALIZANDO PROGRAMA")
     else:
         print("OPCIÓN INCORRECTA")

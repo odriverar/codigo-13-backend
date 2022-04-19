@@ -50,4 +50,37 @@ def actualizarAlumno(indexAlumno, alumnos):
 def eliminarAlumno(indexAlumno, alumnos):
     alumnos.pop(indexAlumno)
     print("ALUMNO ELIMINADO CON EXITO!!!")
+    
+def cargarAlumnos():
+    f = open('alumnos.txt', 'r')
+    strAlumnos = f.read()
+    
+    alumnos = []
+    #Proceso de convcersion, el mismo que convertira una cadena string en una lista de diccionarios
+    listaAlumnos = strAlumnos.splitlines()
+    for l in listaAlumnos:
+        alumnoData = l.split(',')
+        dictAlumno = {
+            'nombre': alumnoData[0],
+            'email': alumnoData[1],
+            'celular': alumnoData[2],
+        }
+        alumnos.append(dictAlumno)
+    f.close
+    return alumnos
+
+def grabarAlumnos(alumnos):
+    f = open('alumnos.txt', 'w')
+    strAlumnos = ""
+    c = 1
+    for l in alumnos:
+        for clave, valor in l.items():
+            strAlumnos += valor
+            if clave != 'celular':
+                strAlumnos += ','
+            elif clave == 'celular':
+                strAlumnos += '\n'
+    f.write(strAlumnos)
+    f.close
+    return strAlumnos    
 #######################################
