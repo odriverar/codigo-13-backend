@@ -1,0 +1,21 @@
+Creacion de entorno virtual
+
+python3.9 -m venv venv
+
+# Para activarlo 
+
+--> windows
+source venv/scripts/activate
+
+--> Mac o Linux
+source venv/bin/activate
+
+# Para descativar 
+
+deactivate
+
+
+INSTALAR LIBRERIAS Y DEPENDENCIAS
+pip3.9 install flask
+
+pip install -r requirement.txt
