@@ -1,0 +1,6 @@
+flask
+firebase_admin
+python-dotenv
+
+flask-bootstrap ##Integra bootstrap con Flask
+flask-WTF       ##Significa What the form

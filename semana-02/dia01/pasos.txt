@@ -1,21 +1,33 @@
-Creacion de entorno virtual
+# Creacion de entorno virtual
 
-python3.9 -m venv venv
+# python3.9 -m venv venv
 
-# Para activarlo 
+# # Para activarlo 
 
---> windows
-source venv/scripts/activate
+# --> windows
+# source venv/scripts/activate
 
---> Mac o Linux
-source venv/bin/activate
+# --> Mac o Linux
+# source venv/bin/activate
 
-# Para descativar 
+# # Para descativar 
 
-deactivate
+# deactivate
 
 
-INSTALAR LIBRERIAS Y DEPENDENCIAS
-pip3.9 install flask
+# INSTALAR LIBRERIAS Y DEPENDENCIAS
+# pip3.9 install flask
 
-pip install -r requirement.txt
+# pip install -r requirement.txt
+
+
+# para levantar el servicio con flask
+# link de referencia; https://flask.palletsprojects.com/en/1.1.x/quickstart/
+#                     https://flask.palletsprojects.com/en/2.1.x/patterns/appfactories/
+
+# export FLASK_APP=run.py
+
+# Para que al modificar un archivo se refleje debemos activar el debug y lo hacemos con:
+
+# export FLASK_ENV=develpment
+
