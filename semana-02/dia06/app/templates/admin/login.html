@@ -1,0 +1,8 @@
+{% extends 'admin/layout.html' %}
+{% import 'bootstrap/wtf.html' as wtf %}
+{% block content %}
+    <div class="container">
+        <h1>LOGIN DE USUARIOS</h1>
+        {{ wtf.quick_form(login_form) }}
+    </div>
+{% endblock %}

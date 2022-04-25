@@ -1,0 +1,36 @@
+<!-- Footer-->
+<footer class="footer text-center">
+    <div class="container">
+        <div class="row">
+            <!-- Footer Location-->
+            <div class="col-lg-4 mb-5 mb-lg-0">
+                <h4 class="text-uppercase mb-4">Localización</h4>
+                <p class="lead mb-0">
+                    {{ session.biografia['direccion'] }}
+                    <br />
+                    {{ session.biografia['direccion2'] }}
+                </p>
+            </div>
+            <!-- Footer Social Icons-->
+            <div class="col-lg-4 mb-5 mb-lg-0">
+                <h4 class="text-uppercase mb-4">Enlaces</h4>
+                {% for e in session.enlace %}
+                    <a class="btn btn-outline-light btn-social mx-1" href="{{ e['url'] }}"><i class="{{ e['estilo'] }}"></i></a>
+                {% endfor %}
+            </div>
+            <!-- Footer About Text-->
+            <div class="col-lg-4">
+                <h4 class="text-uppercase mb-4">Acerca de</h4>
+                <p class="lead mb-0">
+                    Freelance is a free to use, MIT licensed Bootstrap theme created by
+                    <a href="http://startbootstrap.com">Start Bootstrap</a>
+                    .
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+<!-- Copyright Section-->
+<div class="copyright py-4 text-center text-white">
+    <div class="container"><small>Copyright &copy; Your Website 2022</small></div>
+</div>
