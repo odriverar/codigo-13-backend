@@ -8,7 +8,7 @@ $$
 
 DELIMITER ;
 
-CALL listar_alumnos();
+CALL sp_listar_alumnos();
 
 -- Procedmiento para matricular a un alumno
 --  Registrar la tabla TBL_MATRICULA
@@ -29,12 +29,11 @@ CREATE PROCEDURE sp_matricular_alumno(IN alu_id INT, IN niv_id INT, IN mod_id IN
     VALUES(alu_id, niv_id, mod_id);
 
     SELECT MAX(matricula_id) INTO matId FROM tbl_matricula;
-    SELECT COUNT(*) FROM tbl_curso;
+    SELECT COUNT(*) INTO totalCursos FROM tbl_curso;
     
     WHILE curId <= totalCursos DO
         INSERT INTO tbl_matricula_curso(matricula_id, curso_id)
         VALUES (matId, curId);
-
         SET curId = curId + 1;
     END WHILE;
   END

@@ -6,7 +6,7 @@ BEGIN
     DECLARE total INT UNSIGNED;
 
     SELECT count(*) INTO total FROM tbl_curso;
-
+    
     RETURN total;
 END
 $$

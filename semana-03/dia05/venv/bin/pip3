@@ -1,4 +1,4 @@
-#!/Users/david/Documents/TECSUP/BackEnd/codigo-13-backend/semana-03/dia05/venv/bin/python3.9
+#!/Users/david/Documents/TECSUP/BackEnd/codigo-13-backend/semana-03/dia05/venv/bin/python3
 # -*- coding: utf-8 -*-
 import re
 import sys
