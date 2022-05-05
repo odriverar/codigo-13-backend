@@ -96,6 +96,28 @@ def updAlumno(id):
         'message': 'Registro actualizado'
     })
     
+@app.route('/alumno/<id>', methods=['DELETE'])
+def delAlumno(id):
+    try:    
+        cursor = mysql.connection.cursor()
+        
+        sqlUpdAlumno = "delete from tbl_alumno where alumno_id = '" + id + "'"
+        
+        cursor.execute(sqlUpdAlumno)
+        
+        mysql.connection.commit()
+        
+        cursor.close()
+        
+        return jsonify({
+            'ok': True,
+            'message': 'Registro eliminado'
+        })
+    except Exception as err:
+        return jsonify({
+            'ok': False,
+            'message': 'Error al ejecutar delete: ' + err.__str__()
+        }), 401
     
 if __name__ == "__main__":
     app.run(debug=True, port=5000)
