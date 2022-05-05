@@ -57,5 +57,45 @@ def setAlumno():
         'message': 'Registro insertado exitosamente'
     })
     
+@app.route('/alumno/<id>')
+def getAlumnoById(id):
+    cursor = mysql.connection.cursor()
+    cursor.execute("select * from tbl_alumno where alumno_id = '" + id + "'")
+    
+    data = cursor.fetchall()
+    
+    cursor.close()
+    
+    print(data)    
+    
+    return jsonify({
+        'ok': True,
+        'message': 'Datos de un alumno',
+        'content': data
+    })
+    
+@app.route('/alumno/<id>', methods=['PUT'])
+def updAlumno(id):
+    nombre = request.json['nombre']
+    email = request.json['email'] 
+    celular = request.json['celular']
+    github = request.json['github']
+    
+    cursor = mysql.connection.cursor()
+    
+    sqlUpdAlumno = "update tbl_alumno set alumno_nombre = '" + nombre + "', alumno_email = '" + email + "', alumno_celular = '" + celular + "', alumno_github = '" + github + "' where alumno_id = '" + id + "'"
+    
+    cursor.execute(sqlUpdAlumno)
+    
+    mysql.connection.commit()
+    
+    cursor.close()
+    
+    return jsonify({
+        'ok': True,
+        'message': 'Registro actualizado'
+    })
+    
+    
 if __name__ == "__main__":
     app.run(debug=True, port=5000)
