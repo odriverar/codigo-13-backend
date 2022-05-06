@@ -10,6 +10,8 @@ Paso 03 - Instalar Django
 Paso 04 - Crear Proyecto
     django-admin startproject recetas
 
+    django-admin startproject recetas . --> 
+
 Paso 05 - Crear el app en el Proyecto
     cd recetas
     python manage.py startapp app
@@ -23,6 +25,4 @@ Paso 07 - desplegar Proyecto
 
 
     python manage.py makemigrations
-
-
     python manage.py migrate
