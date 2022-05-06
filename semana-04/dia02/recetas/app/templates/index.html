@@ -1,3 +1,4 @@
+{% load crispy_forms_tags %}
 <!DOCTYPE html>
 <html lang="en">
 
@@ -51,15 +52,18 @@
           </div>
           <div class="modal-body">
             <form method="post" action="{% url 'app:registrarReceta' %}">
-              {% csrf_token %}
-              {{ frmReceta.as_p }}
+              {% csrf_token %} {{ frmReceta|crispy }}
               <p>
-                <button type="submit" class="btn btn-primary">Regitrar</button>
+                <button type="submit" class="btn btn-primary">
+                  Regitrar
+                </button>
               </p>
             </form>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">
+              Cancelar
+            </button>
           </div>
         </div>
       </div>
