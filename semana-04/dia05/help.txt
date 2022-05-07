@@ -1,0 +1,2 @@
+Install Pillow 
+https://www.geeksforgeeks.org/how-to-install-pillow-on-macos/
