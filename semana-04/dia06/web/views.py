@@ -42,3 +42,16 @@ def agregarCarrito(request, producto_id):
       print(request.session.get("cart"))
       
       return render(request, 'carrito.html')
+
+def eliminarProductoCarrito(request, producto_id):
+      objProducto = Producto.objects.get(id=producto_id)
+      carritoProducto = Cart(request)
+      carritoProducto.delete(objProducto)
+      
+      return render(request, 'carrito.html')
+
+def limpiarCarrito(request):
+      carritoProducto = Cart(request)
+      carritoProducto.clear()
+      
+      return render(request, 'carrito.html')

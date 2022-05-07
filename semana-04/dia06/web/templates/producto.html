@@ -45,9 +45,11 @@
               </div>
             </div>
           </div>
+          <a href="{% url 'web:agregarCarrito' producto.id %}">
           <button type="submit" class="button">
             <i class="icon ion-android-cart"></i> Add to cart
           </button>
+          </a>
           <p class="qnt-wrap prod-li-qnt">
             <a href="#" class="qnt-plus prod-li-plus"
               ><i class="icon ion-arrow-up-b"></i

@@ -11,15 +11,15 @@
       {% for key, value in request.session.cart.items %}
         <article class="prod-li sectls">
             <div class="prod-li-inner">
-                <a href="product.html" class="prod-li-img">
-                    <img src="http://placehold.it/290x258" alt="">
+                <a href="{% url 'web:producto' value.producto_id %}" class="prod-li-img">
+                    <img src="{{ value.imagen }}" alt="">
                 </a>
                 <div class="prod-li-cont">
                     <div class="prod-li-ttl-wrap">
                         <p>
-                            <a href="#">CATEGORIA</a>
+                            <a href="{% url 'web:productosPorCategoria' value.categoria_id %}">{{ value.categoria }}</a>
                         </p>
-                        <h3><a href="product.html">{{ value.nombre }}</a></h3>
+                        <h3><a href="{% url 'web:producto' value.producto_id %}">{{ value.nombre }}</a></h3>
                     </div><!--
     No Space
     --><div class="prod-li-prices">
@@ -30,7 +30,7 @@
                     <div class="prod-li-qnt-wrap">
                         <p class="qnt-wrap prod-li-qnt">
                             <a href="#" class="qnt-plus prod-li-plus"><i class="icon ion-arrow-up-b"></i></a>
-                            <input type="text" value="1">
+                            <input type="text" value="{{ value.cantidad }}">
                             <a href="#" class="qnt-minus prod-li-minus"><i class="icon ion-arrow-down-b"></i></a>
                         </p>
                     </div>
@@ -49,7 +49,7 @@ No Space
                         <p class="prod-li-rating-count">12</p>
                     </div>
                     <p class="prod-li-add">
-                        <a href="#" class="button hover-label prod-addbtn"><i class="icon ion-close-round"></i><span>Remove</span></a>
+                        <a href="{% url 'web:eliminarProductoCarrito' value.producto_id %}" class="button hover-label prod-addbtn"><i class="icon ion-close-round"></i><span>Eliminar</span></a>
                     </p>
                     <p class="prod-li-compare">
                         <a href="compare.html" class="hover-label prod-li-compare-btn"><span>Compare</span><i class="icon ion-arrow-swap"></i></a>
@@ -93,10 +93,11 @@ No Space
             <input type="submit" class="button" value="Apply">
         </div>
         <div class="cart-collaterals">
+            <a href="{% url 'web:limpiarCarrito' %}" class="checkout-button button">Limpiar carrito</a>
             <a href="#" class="checkout-button button">Proceed to checkout</a>
             <div class="order-total">
                 <p class="cart-totals-ttl">Total</p>
-                <p class="cart-totals-val">$510.00</p>
+                <p class="cart-totals-val">S/ {{ request.session.cartMontoTotal }}</p>
             </div>
         </div>
     </div>
