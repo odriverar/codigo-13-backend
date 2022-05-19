@@ -1,6 +1,8 @@
 from rest_framework.views import APIView
 from rest_framework.response import Response
 
+from rest_framework.permissions import IsAuthenticated
+
 from .models import (
       Categoria, Mesa, Pedido, Plato
 )
@@ -8,6 +10,7 @@ from .models import (
 from .serializers import (
       CategoriaSerializer,
       MesaSerializer,
+      PedidoSerializerGET,
       PedidoSerializerPOST,
       PlatoSerializer,
       CategoriaPlatosSerializer,
@@ -15,6 +18,8 @@ from .serializers import (
 )
 
 class IndexView(APIView):
+      permission_classes = [IsAuthenticated]
+      
       def get(self, request):
             context ={
                   'ok': True,
@@ -23,6 +28,7 @@ class IndexView(APIView):
             return Response(context)
       
 class CategoriaView(APIView):
+      
       def get(self, request):
             dataCategoria = Categoria.objects.all()
             serCategoria = CategoriaSerializer(dataCategoria, many=True)
@@ -35,6 +41,7 @@ class CategoriaView(APIView):
             return Response(context)
       
 class MesaView(APIView):
+      
       def get(self, request):
             dataMesa = Mesa.objects.all()
             serMesa = MesaSerializer(dataMesa, many=True)
@@ -47,6 +54,7 @@ class MesaView(APIView):
             return Response(context)
       
 class PlatoView(APIView):
+      
       def get(self, request):
             dataPlato = Plato.objects.all()
             serPlato = PlatoSerializer(dataPlato, many=True)
@@ -59,6 +67,7 @@ class PlatoView(APIView):
             return Response(context)
 
 class CategoriaPlatosView(APIView):
+      
       def get(self, request, categoria_id):
             dataCategoria = Categoria.objects.get(pk=categoria_id)
             serCategoriaPlatos = CategoriaPlatosSerializer(dataCategoria)
@@ -72,14 +81,25 @@ class CategoriaPlatosView(APIView):
       
 class PedidoView(APIView):
       
-    def post(self,request):
-        serPedido = PedidoSerializerPOST(data=request.data)
-        serPedido.is_valid(raise_exception=True)
-        serPedido.save()
+      def get(self, request):
+            dataPedido = Pedido.objects.all()
+            serPedido = PedidoSerializerGET(dataPedido, many=True)
+            
+            context = {
+                  'ok': True,
+                  'pedidos': serPedido.data
+            }
+            
+            return Response(context)
+      
+      def post(self,request):
+            serPedido = PedidoSerializerPOST(data=request.data)
+            serPedido.is_valid(raise_exception=True)
+            serPedido.save()
 
-        context = {
-            'ok':True,
-            'content':serPedido.data
-        }
+            context = {
+                  'ok':True,
+                  'content':serPedido.data
+            }
         
-        return Response(context)
+            return Response(context)
