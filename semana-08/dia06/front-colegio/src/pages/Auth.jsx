@@ -1,8 +1,59 @@
 import React from "react";
+import AuthService from "../services/auth.service";
+import { createBrowserHistory } from 'history'
+
 
 class Auth extends React.Component {
       constructor(props) { 
             super(props);
+            this.state = {
+                  usuario:'',
+                  password:'',
+                  loading:false,
+                  message:''
+            }
+            this.onChangeUsuario = this.onChangeUsuario.bind(this);
+            this.onChangedPassword = this.onChangedPassword.bind(this);
+            this.handlerLogin = this.handlerLogin.bind(this);
+      }
+
+      onChangeUsuario(e){
+            this.setState({
+                  usuario: e.target.value
+            })
+      }
+
+      onChangedPassword(e){
+            this.setState({
+                  password: e.target.value
+            })
+      }
+
+      handlerLogin(e){
+            e.preventDefault();
+
+            this.setState({
+                  message:"",
+                  loading:true
+            })
+
+            console.log("Usuario: " + this.state.usuario);
+            console.log("Password: " + this.state.password);
+
+            AuthService.login(this.state.usuario, this.state.password).then(
+                  ()=>{
+                        const history = createBrowserHistory();
+                        history.push('/main');
+                        window.location.reload();
+                  },
+                  error => {
+                        const mensajeError = "Datos no validos";
+                        this.setState({
+                              loading:false,
+                              message:mensajeError
+                        })
+                  }
+            )
       }
 
       render() {
@@ -10,59 +61,69 @@ class Auth extends React.Component {
                   <div id="layoutAuthentication">
                         <div id="layoutAuthentication_content">
                               <main>
-                                    <div class="container">
-                                          <div class="row justify-content-center">
-                                                <div class="col-lg-5">
-                                                      <div class="card shadow-lg border-0 rounded-lg mt-5">
-                                                            <div class="card-header">
-                                                                  <h3 class="text-center font-weight-light my-4">Login</h3>
+                                    <div className="container">
+                                          <div className="row justify-content-center">
+                                                <div className="col-lg-5">
+                                                      <div className="card shadow-lg border-0 rounded-lg mt-5">
+                                                            <div className="card-header">
+                                                                  <h3 className="text-center font-weight-light my-4">Login</h3>
                                                             </div>
-                                                            <div class="card-body">
-                                                                  <form>
-                                                                        <div class="form-floating mb-3">
+                                                            <div className="card-body">
+                                                                  <form onSubmit={this.handlerLogin}>
+                                                                        <div className="form-floating mb-3">
                                                                               <input
-                                                                                    class="form-control"
-                                                                                    id="inputEmail"
-                                                                                    type="email"
-                                                                                    placeholder="name@example.com"
+                                                                                    className="form-control"
+                                                                                    id="inputText"
+                                                                                    type="text"
+                                                                                    placeholder="Usuario"
+                                                                                    value={this.state.usuario}
+                                                                                    onChange={this.onChangeUsuario}
                                                                               />
-                                                                              <label for="inputEmail">Email address</label>
+                                                                              <label for="inputEmail">Usuario</label>
                                                                         </div>
-                                                                        <div class="form-floating mb-3">
+                                                                        <div className="form-floating mb-3">
                                                                               <input
-                                                                                    class="form-control"
+                                                                                    className="form-control"
                                                                                     id="inputPassword"
                                                                                     type="password"
                                                                                     placeholder="Password"
+                                                                                    value={this.state.password}
+                                                                                    onChange={this.onChangedPassword}
                                                                               />
                                                                               <label for="inputPassword">Password</label>
                                                                         </div>
-                                                                        <div class="form-check mb-3">
+                                                                        <div className="form-check mb-3">
                                                                               <input
-                                                                                    class="form-check-input"
+                                                                                    className="form-check-input"
                                                                                     id="inputRememberPassword"
                                                                                     type="checkbox"
                                                                                     value=""
                                                                               />
                                                                               <label
-                                                                                    class="form-check-label"
+                                                                                    className="form-check-label"
                                                                                     for="inputRememberPassword"
                                                                               >
                                                                                     Remember Password
                                                                               </label>
                                                                         </div>
-                                                                        <div class="d-flex align-items-center justify-content-between mt-4 mb-0">
-                                                                              <a class="small" href="password.html">
+                                                                        <div className="d-flex align-items-center justify-content-between mt-4 mb-0">
+                                                                              <a className="small" href="password.html">
                                                                                     Forgot Password?
                                                                               </a>
-                                                                              <a class="btn btn-primary" href="index.html">
-                                                                                    Login
-                                                                              </a>
+                                                                              <input type="submit" className="btn btn-primary" value="Login">
+                                                                              </input>
                                                                         </div>
                                                                   </form>
+                                                                  {this.state.message && (
+                                                                        <div className="form-group"> 
+                                                                              <div className="alert alert-danger"> 
+                                                                                    {this.state.message}
+                                                                              </div>
+                                                                        </div>
+                                                                  )}
                                                             </div>
-                                                            <div class="card-footer text-center py-3">
-                                                                  <div class="small">
+                                                            <div className="card-footer text-center py-3">
+                                                                  <div className="small">
                                                                         <a href="register.html">Need an account? Sign up!</a>
                                                                   </div>
                                                             </div>
@@ -73,10 +134,10 @@ class Auth extends React.Component {
                               </main>
                         </div>
                         <div id="layoutAuthentication_footer">
-                              <footer class="py-4 bg-light mt-auto">
-                                    <div class="container-fluid px-4">
-                                          <div class="d-flex align-items-center justify-content-between small">
-                                                <div class="text-muted">Copyright &copy; Your Website 2022</div>
+                              <footer className="py-4 bg-light mt-auto">
+                                    <div className="container-fluid px-4">
+                                          <div className="d-flex align-items-center justify-content-between small">
+                                                <div className="text-muted">Copyright &copy; Your Website 2022</div>
                                                 <div>
                                                       <a href="#">Privacy Policy</a>
                                                       &middot;
